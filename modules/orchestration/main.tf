@@ -1,7 +1,10 @@
 data "aws_region" "this" {}
-
+locals {
+  ideal_function_name = "repl_${var.target_account}_${var.target_region}_${var.target_dynamodb_table_name}"
+  function_name       = length(local.ideal_function_name) > 80 ? substr(local.ideal_function_name, 0, 79) : local.ideal_function_name
+}
 resource "aws_sfn_state_machine" "sfn_state_machine" {
-  name     = "dynamodb_replication_${var.target_account}_${var.target_region}_${var.target_dynamodb_table_name}"
+  name     = local.function_name
   role_arn = aws_iam_role.step-function-exec.arn
   tags     = var.tags
 
