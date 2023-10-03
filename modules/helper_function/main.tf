@@ -1,6 +1,6 @@
 module "helper_lambda" {
   source  = "Adaptavist/aws-lambda/module"
-  version = "1.8.0"
+  version = "1.34.0"
 
   description                        = "SSM helper for dynamoDB replication state machine"
   function_name                      = "helper-${var.target_account}-${var.target_region}-${var.target_dynamodb_table_name}"
