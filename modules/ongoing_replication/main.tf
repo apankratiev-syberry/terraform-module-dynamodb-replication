@@ -6,8 +6,8 @@ locals {
 
 module "replication-lambda" {
   source  = "Adaptavist/aws-lambda/module"
-  version = "1.8.0"
-
+  version = "1.34.0"
+  aws_region = "us-east-1"
   description                        = "Lambda performing ongoing replication between ${var.source_table_stream_arn} and ${var.target_dynamodb_table_name}"
   function_name                      = local.function_name
   disable_label_function_name_prefix = true
