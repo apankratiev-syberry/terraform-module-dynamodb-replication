@@ -1,6 +1,6 @@
 locals {
   ideal_function_name = "dynamodb-replication-${var.target_account}-${var.target_region}-${var.target_dynamodb_table_name}"
-  function_name       = length(local.ideal_function_name) > 34 ? substr(local.ideal_function_name, 0, 33) : local.ideal_function_name
+  function_name       = length(local.ideal_function_name) > 64 ? substr(local.ideal_function_name, 0, 63) : local.ideal_function_name
 }
 
 
@@ -80,14 +80,9 @@ resource "aws_lambda_event_source_mapping" "this" {
   }
 }
 
-data "aws_ssm_parameter" "event_source_mapping_uuid" {
-  name = "/dynamodb_replication/${var.target_account}/${var.target_region}/${var.target_dynamodb_table_name}/event_source_mapping_uuid"
-}
-
-/*
 
 resource "aws_ssm_parameter" "event_source_mapping_uuid" {
   name  = "/dynamodb_replication/${var.target_account}/${var.target_region}/${var.target_dynamodb_table_name}/event_source_mapping_uuid"
   type  = "String"
   value = aws_lambda_event_source_mapping.this.uuid
-}*/
+}
