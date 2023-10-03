@@ -1,7 +1,7 @@
 module "helper_lambda" {
   source  = "Adaptavist/aws-lambda/module"
   version = "1.34.0"
-
+  aws_region = "us-east-1"
   description                        = "SSM helper for dynamoDB replication state machine"
   function_name                      = "helper-${var.target_account}-${var.target_region}-${var.target_dynamodb_table_name}"
   disable_label_function_name_prefix = true
